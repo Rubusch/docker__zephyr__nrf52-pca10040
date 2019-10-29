@@ -32,14 +32,17 @@ ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 
+## get sources
+RUN git clone -j4 https://github.com/Rubusch/zephyr.git
+
+
 ## SDK
-RUN cd zephyr && wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
+RUN cd zephyr && \
+    wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
     chmod +x zephyr-sdk-0.10.3-setup.run && \
     ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
 
 
-## get sources
-RUN git clone -j4 https://github.com/Rubusch/zephyr.git
 
 ## copy build.sh
 COPY build.sh /root/build.sh
