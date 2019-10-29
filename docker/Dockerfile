@@ -6,12 +6,17 @@ WORKDIR /root
 ## https://docs.zephyrproject.org/latest/getting_started/installation_linux.html
 ##
 
-RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge && \
-    apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
+
+## fix missing tzdata setup
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y install tzdata locales
+
+## zephyr setup
+RUN apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
                          ccache dfu-util device-tree-compiler wget python3-pip \
                          python3-setuptools python3-tk python3-wheel xz-utils \
-                         file make gcc gcc-multilib && \
-    apt-get install -y   locales
+                         file make gcc gcc-multilib
 
 ## NOTE
 # A recent DTC version (1.4.6 or higher) is required. Check what version you
