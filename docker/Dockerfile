@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM ubuntu-minimal:19.04
 
 WORKDIR /root
 
@@ -68,7 +68,16 @@ COPY build.sh /root/build.sh
 #RUN cd zephyrproject && git clone -j4 https://github.com/Rubusch/zephyr.git
 # TODO set ZEPHYR_MODULES in .zephyrrc
 # TODO set ZEPHYR_EXTRA_MODULES in .zephyrrc
-
+# cmake -DZEPHYR_MODULES=<path-to-module1>[;<path-to-module2>[...]] ...
+## alternativamente insert
+#set(ZEPHYR_MODULES <path-to-module1> <path-to-module2> [...])
+#include($ENV{ZEPHYR_BASE}/cmake/app/boilerplate.cmake NO_POLICY_SCOPE)
+##
+## Put this in a file with a name like "zephyr-modules.cmake"
+#set(ZEPHYR_MODULES <path-to-module1> <path-to-module2>
+#  CACHE STRING "pre-cached modules")
+## ...and call cmake with
+## -C zephyr-modules.cmake
 
 ## build application (in script)
 CMD ["/bin/bash", "/root/build.sh"]
