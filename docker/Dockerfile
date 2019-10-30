@@ -32,7 +32,7 @@ ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 ## SDK
-RUN cd zephyr && \
+RUN cd zephyrproject && \
     wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
     chmod +x zephyr-sdk-0.10.3-setup.run && \
     ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
