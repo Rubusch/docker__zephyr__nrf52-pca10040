@@ -7,25 +7,27 @@
 ## started with:
 ## $ docker run -ti -v $PWD/mnt:$(pwd)/output afb489d932bc
 ##
+
+## prepare SDK environment
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
-echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
+# ## set up 'unset preset flags' command script
+# echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
+#
+# ## TODO shift this to docker file?
+# ## install zephyr sources
+# pip3 install west
+#
+# ## clone zephyr repository
+# west init zephyrproject
+# cd zephyrproject
+# west update
+#
+# ## install python dependencies
+# pip3 install -r zephyr/scripts/requirements.txt
 
-
-## TODO shift this to docker file?
-## install zephyr sources
-pip3 install -U west
-
-## clone zephyr repository
-west init zephyrproject
-cd zephyrproject
-west update
-
-## install python dependencies
-pip3 install -r zephyr/scripts/requirements.txt
-
-
+   
 ## build hello world
 cd zephyrproject/zephyr
 source zephyr-env.sh
