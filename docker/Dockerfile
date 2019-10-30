@@ -31,20 +31,43 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-
-## get sources
-RUN git clone -j4 https://github.com/Rubusch/zephyr.git
-
-
 ## SDK
 RUN cd zephyr && \
     wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
     chmod +x zephyr-sdk-0.10.3-setup.run && \
     ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
 
+    
+## installation
+ENV ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+ENV ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
+## set up 'unset preset flags' command script
+RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
+
+################################################################################
+## get system via west
+
+## install west
+RUN pip3 install west
+
+## clone zephyr repository
+RUN west init zephyrproject
+RUN cd zephyrproject && west update
+
+## install python dependencies
+RUN cd zephyrproject && pip3 install -r zephyr/scripts/requirements.txt
 
 ## copy build.sh
 COPY build.sh /root/build.sh
 
+################################################################################
+## get sources & CO w/o 'west'
+#RUN mkdir zephyrproject
+#RUN cd zephyrproject && git clone -j4 https://github.com/Rubusch/zephyr.git
+# TODO set ZEPHYR_MODULES in .zephyrrc
+# TODO set ZEPHYR_EXTRA_MODULES in .zephyrrc
+
+
+## build application (in script)
 CMD ["/bin/bash", "/root/build.sh"]
