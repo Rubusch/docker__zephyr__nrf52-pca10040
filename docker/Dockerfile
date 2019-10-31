@@ -52,12 +52,10 @@ RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
 ## install west
 RUN pip3 install west
 
-## clone zephyr repository
+## zephyr setup
 RUN west init zephyrproject
 RUN cd zephyrproject && west update
-
-## install python dependencies
-RUN cd zephyrproject && pip3 install -r zephyr/scripts/requirements.txt
+RUN pip3 install -r zephyr/scripts/requirements.txt
 
 ## copy build.sh
 COPY build.sh /root/build.sh
