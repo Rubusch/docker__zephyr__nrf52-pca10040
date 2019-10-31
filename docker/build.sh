@@ -44,7 +44,7 @@ dpkg -i /mnt/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
 
    
 ## build hello world
-cd zephyrproject/zephyr
+cd ~/zephyrproject/zephyr
 source zephyr-env.sh
 west build -b reel_board samples/hello_world
 
