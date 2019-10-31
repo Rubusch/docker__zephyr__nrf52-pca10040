@@ -10,7 +10,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
 
 ## fix missing tzdata setup
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get -y install tzdata locales
+RUN apt-get install -y   tzdata locales
+
+## nrf52_pca10040 board
+RUN apt-get install -y   build-essential flex bison libncurses5
 
 ## zephyr setup
 RUN apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
@@ -18,11 +21,8 @@ RUN apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
                          python3-setuptools python3-tk python3-wheel xz-utils \
                          file make gcc gcc-multilib
 
-## nrf52_pca10040 board
-RUN apt-get install -y   build-essential flex bison libncurses5
-
 ## debugging
-RUN apt-get install -y   vim screen
+#RUN apt-get install -y   vim screen
 
 
 ## NOTE
@@ -33,24 +33,26 @@ RUN apt-get install -y   vim screen
 # environment variable.
 
 RUN locale-gen en_US.UTF-8
+
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 
-## SDK
-RUN mkdir -p zephyrproject
-RUN cd zephyrproject && wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
-    chmod +x zephyr-sdk-0.10.3-setup.run && \
-    ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
+## SDK # TODO check, needed?
+#RUN mkdir -p zephyrproject
+#RUN cd zephyrproject && wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
+#    chmod +x zephyr-sdk-0.10.3-setup.run && \
+#    ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
 
-    
+
 ## installation
-ENV ZEPHYR_TOOLCHAIN_VARIANT=zephyr
-ENV ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
+#ENV ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+#ENV ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
 ## set up 'unset preset flags' command script
-RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
+#RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
+
 
 ################################################################################
 ## get system via west
@@ -62,6 +64,7 @@ RUN pip3 install west
 RUN west init zephyrproject
 RUN cd zephyrproject && west update
 RUN pip3 install -r zephyr/scripts/requirements.txt
+
 
 COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
 RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
