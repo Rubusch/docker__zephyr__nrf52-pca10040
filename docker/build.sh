@@ -48,6 +48,11 @@ cd ~/zephyrproject/zephyr
 source zephyr-env.sh
 west build -b reel_board samples/hello_world
 
+##
+source ~/env.sh
+git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git ~/zephyrproject/dtc
+cd ~/zephyrproject/dtc && make && make install
+
 
 ## obtain build artifacts
 #TODO
