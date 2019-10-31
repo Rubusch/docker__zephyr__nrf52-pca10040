@@ -33,7 +33,8 @@ west init --mr=v1.14.1 ~/zephyrproject
 west update
 pip3 install -r zephyr/scripts/requirements.txt
 
-## nordex tool collection (segger, nrf...)
+## nordic PCA10040 v1.2.4 board
+## tool collection (segger, nrf...)
 cd ~/zephyrproject
 tar -xvjfgcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
 dpkg -i /mnt/JLink_Linux_V644e_x86_64.deb
