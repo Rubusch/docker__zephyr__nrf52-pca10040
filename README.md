@@ -2,6 +2,8 @@
 
 Contains a Dockerfile for building an docker image and its container for zephyr.
 
+Setup for Nordic PCA10040 board (Embedded Linux Conference Europe, Lyon 2019).
+
 Implicitely will run ```git clone https://github.com/Rubusch/zephyr.git``` inside the docker container.
 
 
