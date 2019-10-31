@@ -27,16 +27,16 @@ export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 # ## install python dependencies
 # pip3 install -r zephyr/scripts/requirements.txt
    
-## zephyr board / nordex
-cd ~/zephyrproject
-west init --mr=v1.14.1 ~/zephyrproject
-west update
-pip3 install -r zephyr/scripts/requirements.txt
+## zephyr setup
+#cd ~/zephyrproject
+#west init --mr=v1.14.1 ~/zephyrproject
+#west update
+#pip3 install -r zephyr/scripts/requirements.txt
 
 ## nordic PCA10040 v1.2.4 board
 ## tool collection (segger, nrf...)
-cd ~/zephyrproject
-tar -xvjfgcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
+cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
+apt-get install -y build-essential flex bison libncurses5 #libgpm2 libtinfo5
 dpkg -i /mnt/JLink_Linux_V644e_x86_64.deb
 dpkg -i /mnt/RF-Command-Line-Tools_10_3_0_Linux-amd64.deb
 
