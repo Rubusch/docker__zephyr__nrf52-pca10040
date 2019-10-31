@@ -18,6 +18,13 @@ RUN apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
                          python3-setuptools python3-tk python3-wheel xz-utils \
                          file make gcc gcc-multilib
 
+## nrf52_pca10040 board
+RUN apt-get install -y   build-essential flex bison libncurses5
+
+## debugging
+RUN apt-get install -y   vim screen
+
+
 ## NOTE
 # A recent DTC version (1.4.6 or higher) is required. Check what version you
 # have by using dtc --version. If you have an older version, either install a
@@ -26,14 +33,13 @@ RUN apt-get install -y   --no-install-recommends git cmake ninja-build gperf \
 # environment variable.
 
 RUN locale-gen en_US.UTF-8
-
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
+
 ## SDK
 RUN mkdir -p zephyrproject
-
 RUN cd zephyrproject && wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.10.3/zephyr-sdk-0.10.3-setup.run && \
     chmod +x zephyr-sdk-0.10.3-setup.run && \
     ./zephyr-sdk-0.10.3-setup.run -- -d ~/zephyr-sdk-0.10.3
@@ -57,7 +63,24 @@ RUN west init zephyrproject
 RUN cd zephyrproject && west update
 RUN pip3 install -r zephyr/scripts/requirements.txt
 
-## copy build.sh
+COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+
+COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
+RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
+
+COPY JLink_Linux_V644e_x86_64.deb /root/JLink_Linux_V644e_x86_64.deb
+RUN dpkg -i ~/JLink_Linux_V644e_x86_64.deb
+
+COPY nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb /root/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
+RUN dpkg -i ~/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
+
+RUN git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git ~/zephyrproject/dtc
+RUN cd ~/zephyrproject/dtc && make && make install
+
+
+COPY env.sh /root/env.sh
+
 COPY build.sh /root/build.sh
 
 ################################################################################
