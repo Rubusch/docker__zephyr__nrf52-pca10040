@@ -18,6 +18,5 @@ $ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr
 
 
 ```
-$ docker run -ti rubuschl:zephyr /bin/bash
+$ docker run -ti -v $PWD/output:/mnt rubuschl:zephyr /bin/bash
 ```
-
