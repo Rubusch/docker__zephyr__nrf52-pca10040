@@ -35,10 +35,11 @@ export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
 ## nordic PCA10040 v1.2.4 board
 ## tool collection (segger, nrf...)
-cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
+cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
 apt-get install -y build-essential flex bison libncurses5 #libgpm2 libtinfo5
 dpkg -i /mnt/JLink_Linux_V644e_x86_64.deb
-dpkg -i /mnt/RF-Command-Line-Tools_10_3_0_Linux-amd64.deb
+dpkg -i /mnt/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
 
 
    
