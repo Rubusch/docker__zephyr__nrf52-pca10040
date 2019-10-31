@@ -9,8 +9,11 @@
 ##
 
 ## prepare SDK environment
-export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
-export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
+source ~/env.sh
+
+## TODO rm
+#export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+#export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
 # ## set up 'unset preset flags' command script
 # echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
@@ -35,25 +38,22 @@ export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-0.10.3
 
 ## nordic PCA10040 v1.2.4 board
 ## tool collection (segger, nrf...)
-cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
-cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
-apt-get install -y build-essential flex bison libncurses5 #libgpm2 libtinfo5
-dpkg -i /mnt/JLink_Linux_V644e_x86_64.deb
-dpkg -i /mnt/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
+# cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+# cd ~/zephyrproject && tar -xvJf /mnt/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
+# apt-get install -y build-essential flex bison libncurses5
+# dpkg -i /mnt/JLink_Linux_V644e_x86_64.deb
+# dpkg -i /mnt/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
 
-
-   
+# TODO rm   
 ## build hello world
-cd ~/zephyrproject/zephyr
-source zephyr-env.sh
-west build -b reel_board samples/hello_world
+#cd ~/zephyrproject/zephyr
+#source zephyr-env.sh
+#west build -b reel_board samples/hello_world
 
-##
+## build for nrf52_pca10040
+cd ~/zephyrproject
 source ~/env.sh
-git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git ~/zephyrproject/dtc
-#git checkout v1.4.7 -b v1.4.7
-cd ~/zephyrproject/dtc && make && make install
-
+west build -b nrf52_pca10040 zephyr/samples/bluetooth/beacon
 
 ## obtain build artifacts
-#TODO
+west flash --erase
