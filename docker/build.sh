@@ -51,7 +51,7 @@ west build -b reel_board samples/hello_world
 ##
 source ~/env.sh
 git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git ~/zephyrproject/dtc
-git checkout v1.4.7 -b v1.4.7
+#git checkout v1.4.7 -b v1.4.7
 cd ~/zephyrproject/dtc && make && make install
 
 
