@@ -62,8 +62,8 @@ RUN pip3 install west
 
 ## zephyr setup
 RUN west init zephyrproject
-RUN cd zephyrproject && west update
-RUN pip3 install -r zephyr/scripts/requirements.txt
+RUN cd ~/zephyrproject && west update
+RUN cd ~/zephyrproject && pip3 install -r zephyr/scripts/requirements.txt
 
 
 COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
