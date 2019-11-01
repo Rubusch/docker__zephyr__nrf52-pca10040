@@ -2,7 +2,7 @@
 
 Contains a Dockerfile for building an docker image and its container for zephyr.
 
-Setup for Nordic PCA10040 board (Embedded Linux Conference Europe, Lyon 2019).
+Setup for Nordic nRF52 PCA10040 board (Embedded Linux Conference Europe, Lyon 2019).
 
 Implicitely will run ```git clone https://github.com/Rubusch/zephyr.git``` inside the docker container.
 
@@ -28,7 +28,7 @@ docker $>
 
 ## Target
 
-Building the board support package (bsp) for the target, e.g. the NRF52_PCA10040 eval board
+Building the board support package (bsp) for the target, e.g. the nRF52 PCA10040 eval board
 
 ```
 docker $> ./build.sh
