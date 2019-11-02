@@ -59,12 +59,13 @@ RUN cd ~/zephyrproject && pip3 install -r zephyr/scripts/requirements.txt
 ################################################################################
 ## specific: Nordic nRF52-PCA10040 board
 
-# TODO check to remove
-#COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
-#RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
-#
-#COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
-#RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
+# TODO download some official toolchain, problem: page seems buggy
+#RUN cd ~/zephyrproject && wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
+COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
+
+COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz /root/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
+RUN cd ~/zephyrproject && tar -xvJf ~/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
 
 COPY JLink_Linux_V644e_x86_64.deb /root/JLink_Linux_V644e_x86_64.deb
 RUN dpkg -i ~/JLink_Linux_V644e_x86_64.deb
