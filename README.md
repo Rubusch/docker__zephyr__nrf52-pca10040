@@ -35,8 +35,8 @@ https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
 
 ```
 $ cd ./docker/
-$ time docker build --no-cache --tag 19.04 -t rubuschl:zephyr-nrf52-pca10040 .
-$ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr-nrf52-pca10040
+$ time docker build --no-cache --tag 19.04 -t zephyr-nrf52-pca10040:$(date +%Y%m%d%H%M%S) .
+$ time docker run -ti --rm -v $PWD/output:/mnt zephyr-nrf52-pca10040:20191102182643
 ```
 
 
@@ -46,7 +46,7 @@ $ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr-nrf52-pca10040
 
 
 ```
-$ docker run -ti --privileged -v $PWD/output:/mnt rubuschl:zephyr-nrf52-pca10040 /bin/bash
+$ docker run -ti --privileged -v $PWD/output:/mnt zephyr-nrf52-pca10040:20191102182643 /bin/bash
 docker $>
 ```
 
