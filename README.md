@@ -23,8 +23,8 @@ https://docs.zephyrproject.org/latest/guides/tools/nordic_segger.html
 
 ```
 $ cd ./docker/
-$ time docker build --no-cache --tag 19.04 -t rubuschl:zephyr .
-$ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr
+$ time docker build --no-cache --tag 19.04 -t rubuschl:zephyr-nrf52-pca10040 .
+$ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr-nrf52-pca10040
 ```
 
 
@@ -34,7 +34,7 @@ $ time docker run -ti --rm -v $PWD/output:/mnt rubuschl:zephyr
 
 
 ```
-$ docker run -ti --privileged -v $PWD/output:/mnt rubuschl:zephyr /bin/bash
+$ docker run -ti --privileged -v $PWD/output:/mnt rubuschl:zephyr-nrf52-pca10040 /bin/bash
 docker $>
 ```
 
