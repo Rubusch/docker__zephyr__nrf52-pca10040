@@ -1,10 +1,22 @@
-# docker__zephyr
+# Docker Container Description: Zephyr, nRF52 PCA10040
 
 Contains a Dockerfile for building an docker image and its container for zephyr.
 
 Setup for Nordic nRF52 PCA10040 board (Embedded Linux Conference Europe, Lyon 2019).
 
 Implicitely will run ```git clone https://github.com/Rubusch/zephyr.git``` inside the docker container.
+
+
+
+## Resources
+
+
+https://docs.zephyrproject.org/latest/boards/arm/nrf52_pca10040/doc/index.html
+
+
+Configuration of the necessary software: building and flashing of nordic boards (via segger).
+https://docs.zephyrproject.org/latest/guides/tools/nordic_segger.html
+
 
 
 ## Build
