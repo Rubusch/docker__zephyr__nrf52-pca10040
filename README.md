@@ -17,6 +17,18 @@ https://docs.zephyrproject.org/latest/boards/arm/nrf52_pca10040/doc/index.html
 Configuration of the necessary software: building and flashing of nordic boards (via segger).
 https://docs.zephyrproject.org/latest/guides/tools/nordic_segger.html
 
+gcc-arm-none-eabi toolchain documentation
+https://docs.zephyrproject.org/latest/getting_started/toolchain_3rd_party_x_compilers.html?highlight=gnuarmemb
+
+download of original gcc-arm-none-eabi toolchain (link seems down, tar.gz)
+https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
+
+download of original nRF command line tools (tar.gz)
+https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/nRFCommandLineTools1041Linuxamd64tar.gz
+
+download of original JLink (segger, .deb)
+https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
+
 
 
 ## Build
