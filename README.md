@@ -35,8 +35,19 @@ https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
 
 ```
 $ cd ./docker/
-$ time docker build --no-cache -t rubuschl/zephyr-nrf52-pca10040:$(date +%Y%m%d%H%M%S) .
-$ time docker run -ti --rm -v $PWD/output:/mnt rubuschl/zephyr-nrf52-pca10040:20191102182643
+$ time docker build --build-arg USER=$USER -t rubuschl/zephyr-nrf52:$(date +%Y%m%d%H%M%S) .
+```
+
+
+## Usage
+
+```
+$ docker images
+    REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+    rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
+    ubuntu                   xenial              5f2bf26e3524        4 days ago          123MB
+
+$ time docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353
 ```
 
 
@@ -46,7 +57,12 @@ $ time docker run -ti --rm -v $PWD/output:/mnt rubuschl/zephyr-nrf52-pca10040:20
 
 
 ```
-$ docker run -ti --privileged -v $PWD/output:/mnt rubuschl/zephyr-nrf52-pca10040:20191102182643 /bin/bash
+$ docker images
+    REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+    rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
+    ubuntu                   xenial              5f2bf26e3524        4 days ago          123MB
+
+$ docker run -ti --user=$USER:$USER --workdir=/home/$USER --privileged -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353 /bin/bash
 docker $>
 ```
 
