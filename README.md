@@ -47,7 +47,7 @@ $ docker images
     rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
     ubuntu                   xenial              5f2bf26e3524        4 days ago          123MB
 
-$ time docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353
+$ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353
 ```
 
 
@@ -62,7 +62,7 @@ $ docker images
     rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
     ubuntu                   xenial              5f2bf26e3524        4 days ago          123MB
 
-$ docker run -ti --user=$USER:$USER --workdir=/home/$USER --privileged -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353 /bin/bash
+$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER --privileged -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353 /bin/bash
 docker $>
 ```
 
