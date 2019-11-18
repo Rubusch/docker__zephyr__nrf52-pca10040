@@ -7,12 +7,12 @@ Setup for Nordic nRF52 PCA10040 board (Embedded Linux Conference Europe, Lyon 20
 Implicitely will run ```git clone https://github.com/Rubusch/zephyr.git``` inside the docker container.
 
 
+![nRF52 PCA10040 connected](pics/nRF52_PCA10040.jpg)
+
 
 ## Resources
 
-
 https://docs.zephyrproject.org/latest/boards/arm/nrf52_pca10040/doc/index.html
-
 
 Configuration of the necessary software: building and flashing of nordic boards (via segger).
 https://docs.zephyrproject.org/latest/guides/tools/nordic_segger.html
@@ -53,18 +53,8 @@ $ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/outp
 
 ## Debug
 
-**NOTE**: privileged mode is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain
+**NOTE**: ``--privileged`` mode is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain. Append ``/bin/bash`` to enter the current container for debugging.
 
-
-```
-$ docker images
-    REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ubuntu                   xenial              5f2bf26e3524        4 days ago          123MB
-
-$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER --privileged -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353 /bin/bash
-docker $>
-```
 
 ## Target
 
