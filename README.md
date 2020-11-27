@@ -38,6 +38,8 @@ $ cd ./docker/
 $ time docker build --build-arg USER=$USER -t rubuschl/zephyr-nrf52:$(date +%Y%m%d%H%M%S) .
 ```
 
+Append ``--no-cache`` for really re-building the container, which may fix some build bugs  
+
 
 ## Usage
 
@@ -52,11 +54,8 @@ $ docker images
 $ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/mnt rubuschl/zephyr-nrf52:20191104161353
 ```
 
-
-## Debug
-
-**NOTE**: ``--privileged`` mode is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain.  
-Append ``/bin/bash`` to enter the current container for debugging.  
+Appending ``--privileged`` is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain  
+Append ``/bin/bash`` to enter the current container for debugging  
 
 
 ## Target
