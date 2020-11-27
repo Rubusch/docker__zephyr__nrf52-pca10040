@@ -41,6 +41,8 @@ $ time docker build --build-arg USER=$USER -t rubuschl/zephyr-nrf52:$(date +%Y%m
 
 ## Usage
 
+Example tag **20191104161353**  
+
 ```
 $ docker images
     REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
@@ -53,24 +55,26 @@ $ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/outp
 
 ## Debug
 
-**NOTE**: ``--privileged`` mode is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain. Append ``/bin/bash`` to enter the current container for debugging.
+**NOTE**: ``--privileged`` mode is not _safe_, the docker container is supposed rather to allow for archiving of the toolchain.  
+Append ``/bin/bash`` to enter the current container for debugging.  
 
 
 ## Target
 
-Building the board support package (bsp) for the target, e.g. the nRF52 PCA10040 eval board
+Building the board support package (bsp) for the target, e.g. the nRF52 PCA10040 eval board  
 
 ```
 docker $> ./build.sh
 docker $> source ~/env.sh
+
 docker $> cd ~/zephyrproject
 docker $> west build -b nrf52_pca10040 zephyr/samples/bluetooth/beacon
 ```
 
-Flashing the target
+Flashing the target  
 
 ```
 docker $> west flash --erase
 ```
 
-Use the /dev/ttyACM0 device for debugging the target.
+Use the /dev/ttyACM0 device for debugging the target  
