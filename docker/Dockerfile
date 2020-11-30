@@ -147,6 +147,7 @@ RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
 ## setup nRF tools
 RUN cd /home/$USER && wget https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-12-0/${ZEPHYR_NRF_PACKAGE}
 RUN cd /home/$USER && mv ${ZEPHYR_NRF_PACKAGE} ${ZEPHYR_NRF_PACKAGE}.tar.gz && tar xzf ${ZEPHYR_NRF_PACKAGE}.tar.gz
+RUN rm -rf /home/$USER/${ZEPHYR_NRF_PACKAGE}.tar.gz
 RUN dpkg -i --force-overwrite ./nRF-Command-Line-Tools_${ZEPHYR_NRF_VERSION}_Linux-amd64.deb
 RUN dpkg -i --force-overwrite ./JLink_Linux_V688a_x86_64.deb
 
