@@ -32,6 +32,8 @@ https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software
 download of original JLink (segger, .deb)  
 https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb  
 
+Please, find a wrap up package of all nRF tools (SEGGER & CO) here
+https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Command-Line-Tools/Download
 
 
 ## Build
@@ -54,7 +56,7 @@ $ docker images
     rubuschl/zephyr-nrf52    20191104161353      cbf4cb380168        24 minutes ago      10.5GB
     ...
 
-$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER --device=/dev/ttyS0 -v $PWD/configs:/home/$USER/configs -v $PWD/zephyr:/home/$USER/zephyrproject/zephyr rubuschl/zephyr-nrf52:20191104161353
+$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER --device=/dev/ttyS0 -v $PWD/configs:/home/$USER/configs -v $PWD/zephyr:/home/$USER/zephyrproject/zephyr rubuschl/zephyr-nrf52:20191104161353 /bin/bash
 ```
 
 Make sure the device is plugged (/dev/ttyS0 exists)  

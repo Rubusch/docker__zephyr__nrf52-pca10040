@@ -11,7 +11,8 @@ ARG USER="${USER}"
 
 ARG ZEPHYR_BRANCH="v2.4-branch"
 ARG ZEPHYR_SDK_VERSION="0.11.4"
-
+ARG ZEPHYR_NRF_VERSION="10_12_0"
+ARG ZEPHYR_NRF_PACKAGE="nRFCommandLineTools10120Linuxamd64tar.gz"
 
 ################################################################################
 ## set up apt fully functional
@@ -139,24 +140,15 @@ RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
 ################################################################################
 ## specific: Nordic nRF52-PCA10040 board
 
-## TODO download some official toolchain, problem: page(s) seems buggy
-##RUN cd /home/$USER/zephyrproject && wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2
-#
-#COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz /home/$USER/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
-#RUN cd /home/$USER/zephyrproject && tar -xvJf /home/$USER/gcc-arm-none-eabi-8-2019-q3-update-linux-pt1.tar.xz
-#
-#COPY gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz /home/$USER/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
-#RUN cd /home/$USER/zephyrproject && tar -xvJf /home/$USER/gcc-arm-none-eabi-8-2019-q3-update-linux-pt2.tar.xz
-
-COPY JLink_Linux_V644e_x86_64.deb /home/$USER/JLink_Linux_V644e_x86_64.deb
-RUN dpkg -i /home/$USER/JLink_Linux_V644e_x86_64.deb
-
-COPY nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb /home/$USER/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
-RUN dpkg -i /home/$USER/nRF-Command-Line-Tools_10_3_0_Linux-amd64.deb
-
 ## needs DTC > 1.4.7
-RUN cd /home/$USER/zephyrproject && git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git dtc
-RUN cd /home/$USER/zephyrproject/dtc && make && make install
+#RUN cd /home/$USER/zephyrproject && git clone --branch v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git dtc
+#RUN cd /home/$USER/zephyrproject/dtc && make && make install
+
+## setup nRF tools
+RUN cd /home/$USER && wget https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-12-0/${ZEPHYR_NRF_PACKAGE}
+RUN cd /home/$USER && mv ${ZEPHYR_NRF_PACKAGE} ${ZEPHYR_NRF_PACKAGE}.tar.gz && tar xzf ${ZEPHYR_NRF_PACKAGE}.tar.gz
+RUN dpkg -i --force-overwrite ./nRF-Command-Line-Tools_${ZEPHYR_NRF_VERSION}_Linux-amd64.deb
+RUN dpkg -i --force-overwrite ./JLink_Linux_V688a_x86_64.deb
 
 RUN chown $USER:$USER -R /home/$USER
 
