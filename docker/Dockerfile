@@ -135,18 +135,6 @@ RUN cd /home/$USER && sudo su $USER -c "rm -rf ./zephyr-sdk-${ZEPHYR_SDK_VERSION
 ### (opt) set up 'unset preset flags' command script
 RUN echo 'unset CFLAGS CXXFLAGS' >> /etc/profile.d/unset_cflags.sh
 
-## get zephyr sources via west (regular way to install)
-
-RUN pip3 install west
-RUN cd /home/$USER && west init zephyrproject
-RUN cd /home/$USER/zephyrproject && west update
-
-## (opt) use my own branch
-RUN cd /home/$USER/zephyrproject && rm -rf zephyr && git clone https://github.com/Rubusch/zephyr.git
-
-## continue zephyr sources installation
-RUN cd /home/$USER/zephyrproject && pip3 install -r zephyr/scripts/requirements.txt
-
 
 ################################################################################
 ## specific: Nordic nRF52-PCA10040 board
